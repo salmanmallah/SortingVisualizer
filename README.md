@@ -40,7 +40,7 @@ Made with ❤️ by **Salman Mallah**
 ## 🚀 Live Demo
 
 🔗 [Click here to try the visualizer](#)  
-*(Add your GitHub Pages or Netlify link here if deployed)*
+*[(lIVE)](https://salmanmallah.me/SortingVisualizer/)*
 
 ---
 
