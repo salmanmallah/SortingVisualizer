@@ -39,7 +39,7 @@ Made with ❤️ by **Salman Mallah**
 
 ## 🚀 Live Demo
 
-🔗 [Click here to try the visualizer]([#](https://salmanmallah.me/SortingVisualizer/))  
+🔗 [Click here to try the visualizer](https://salmanmallah.me/SortingVisualizer/)  
 
 
 ---
