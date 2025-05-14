@@ -54,7 +54,9 @@ Made with ❤️ by **Salman Mallah**
 
 ## 📷 Screenshots
 
-> (You can insert screenshots here to show each sorting algorithm’s visual layout)
+![Main Interface](snapshots/0_unsorted.png)
+![Main Interface](snapshots/1_sorted.png)
+
 
 ---
 
