@@ -3,7 +3,7 @@
 An interactive web-based tool to **visualize, compare, and understand** how different sorting algorithms work. Designed for students, educators, and developers to learn sorting concepts through real-time animations.
 
 ![Project Banner](https://img.shields.io/badge/MUET-CyberSecurity-blue)  
-Made with ❤️ by **MUET Cyber Security**
+Made with ❤️ by **Salman Mallah**
 
 ---
 
