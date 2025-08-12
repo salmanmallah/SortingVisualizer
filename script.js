@@ -48,7 +48,51 @@ function renderBars(array, container, activeIndices = [], sortedIndices = []) {
 }
 
 function updateTimer(algoName, time) {
-    document.getElementById(`${algoName}-time`).textContent = `Time: ${time}ms`;
+    const timerElem = document.getElementById(`${algoName}-time`);
+    if (time > 1000) {
+        const seconds = (time / 1000).toFixed(2);
+        timerElem.textContent = `Time: ${seconds}s`;
+    } else {
+        timerElem.textContent = `Time: ${time}ms`;
+    }
+    // Store time for ranking
+    if (!window.algoTimes) window.algoTimes = {};
+    window.algoTimes[algoName] = time;
+    updateRankings();
+}
+
+function updateRankings() {
+    const times = window.algoTimes || {};
+    // Get sorted algorithm names by time (ascending)
+    const sorted = Object.entries(times)
+        .sort((a, b) => a[1] - b[1])
+        .map(([name]) => name);
+    sorted.forEach((name, idx) => {
+        // Find the container by matching the algorithm title text
+        const containers = document.querySelectorAll('.algorithm-container');
+        containers.forEach(container => {
+            const titleElem = container.querySelector('.algorithm-title');
+            if (titleElem && titleElem.textContent === name) {
+                let rankElem = container.querySelector('.algo-rank');
+                if (!rankElem) {
+                    rankElem = document.createElement('div');
+                    rankElem.className = 'algo-rank';
+                    rankElem.style.position = 'absolute';
+                    rankElem.style.top = '8px';
+                    rankElem.style.right = '12px';
+                    rankElem.style.background = '#00ccff';
+                    rankElem.style.color = '#1a1a1a';
+                    rankElem.style.padding = '2px 8px';
+                    rankElem.style.borderRadius = '8px';
+                    rankElem.style.fontWeight = 'bold';
+                    rankElem.style.fontSize = '0.95em';
+                    container.style.position = 'relative';
+                    container.appendChild(rankElem);
+                }
+                rankElem.textContent = `${idx + 1}${idx === 0 ? 'st' : idx === 1 ? 'nd' : idx === 2 ? 'rd' : 'th'} fastest`;
+            }
+        });
+    });
 }
 
 async function startAllAlgorithms() {
@@ -80,6 +124,8 @@ async function bubbleSort(array, viz, timer) {
         }
         timer(Date.now() - start);
     }
+    // Show final sorted state
+    renderBars(array, viz, [], Array.from(array.keys()));
     return array;
 }
 
@@ -113,6 +159,7 @@ async function quickSort(array, viz, timer) {
     }
 
     await sort(0, array.length - 1);
+    renderBars(array, viz, [], Array.from(array.keys()));
     return array;
 }
 
@@ -149,6 +196,7 @@ async function mergeSort(array, viz, timer) {
     }
 
     await sort(0, array.length - 1);
+    renderBars(array, viz, [], Array.from(array.keys()));
     return array;
 }
 
@@ -164,6 +212,7 @@ async function insertionSort(array, viz, timer) {
         }
         timer(Date.now() - start);
     }
+    renderBars(array, viz, [], Array.from(array.keys()));
     return array;
 }
 
@@ -183,6 +232,7 @@ async function selectionSort(array, viz, timer) {
         }
         timer(Date.now() - start);
     }
+    renderBars(array, viz, [], Array.from(array.keys()));
     return array;
 }
 
@@ -216,6 +266,7 @@ async function heapSort(array, viz, timer) {
         await heapify(i, 0);
         timer(Date.now() - start);
     }
+    renderBars(array, viz, [], Array.from(array.keys()));
     return array;
 }
 
